@@ -10,6 +10,7 @@ class personalinfo extends Model
     use HasFactory;
     protected $fillable = [
         // Personal Information
+        'user_id',
         'first_name',
         'middle_name',
         'last_name',
@@ -35,6 +36,7 @@ class personalinfo extends Model
         'g_civil_status',
         'g_contact_number',
         'g_address',
-        'relationship_with_pwd'
+        'relationship_with_pwd',
+        'status'
     ];
 }

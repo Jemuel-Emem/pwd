@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Livewire\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Personalinfo as PF;
 use Livewire\Component;
 use WireUi\Traits\WireUiActions;
 
-
-
 class Applicant extends Component
 {
     use WireUiActions;
+
     public $personal_info = [
         'first_name' => '',
         'middle_name' => '',
@@ -34,7 +34,8 @@ class Applicant extends Component
         'g_civil_status' => '',
         'g_contact_number' => '',
         'g_address' => '',
-        'relationship_with_pwd' => ''
+        'relationship_with_pwd' => '',
+        'status' => 'Not Submitted'
     ];
 
     protected $rules = [
@@ -46,7 +47,7 @@ class Applicant extends Component
         'personal_info.date_of_birth' => 'required|date',
         'personal_info.age' => 'required|integer',
         'personal_info.civil_status' => 'required|string',
-        'personal_info.contact_number' => 'required|string|max:255',
+        'personal_info.contact_number' => 'required|string|max:255|unique:personalinfos,contact_number',
         'personal_info.address' => 'required|string|max:255',
         'personal_info.barangay' => 'required|string|max:255',
         'personal_info.type_of_disability' => 'required|string|max:255',
@@ -66,17 +67,55 @@ class Applicant extends Component
 
     public function submit()
     {
-
         $this->validate();
 
-         PF::create($this->personal_info);
-         flash()->success('Personal information saved successfully!');
+        PF::updateOrCreate(
+            ['user_id' => Auth::id()],
+            array_merge($this->personal_info, ['status' => 'Already Submit Personal Information'])
+        );
 
-        $this->reset('personal_info');
+        flash()->success('Personal information saved successfully!');
+
+
+        $this->loadPersonalInfo();
+    }
+    public function submitPersonalInformation()
+    {
+        $this->validate();
+
+        PF::updateOrCreate(
+            ['user_id' => Auth::id()],
+            array_merge($this->personal_info, ['status' => 'Already Submit Personal Information'])
+        );
+
+        flash()->success('Personal information saved successfully!');
+
+
+        $this->loadPersonalInfo();
+    }
+
+    public $isFormVisible = true;
+
+    public function mount()
+    {
+        $this->loadPersonalInfo();
+    }
+
+    public function loadPersonalInfo()
+    {
+        $existingInfo = PF::where('user_id', Auth::id())->first();
+
+        if ($existingInfo) {
+            $this->personal_info = $existingInfo->toArray();
+            $this->isFormVisible = $this->personal_info['status'] !== 'Already Submit Personal Information';
+        }
     }
 
     public function render()
-    {
-        return view('livewire.user.applicant');
-    }
+{
+    return view('livewire.user.applicant', [
+        'isFormVisible' => $this->isFormVisible,
+    ]);
+}
+
 }

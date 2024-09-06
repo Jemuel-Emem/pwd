@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('personalinfos', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
@@ -39,6 +40,9 @@ return new class extends Migration
             $table->string('g_contact_number');
             $table->string('g_address');
             $table->string('relationship_with_pwd');
+
+
+            $table->string('status');
             $table->timestamps();
         });
     }
