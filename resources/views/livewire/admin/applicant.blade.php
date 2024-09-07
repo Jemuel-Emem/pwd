@@ -2,17 +2,20 @@
 <div class="max-w-6xl mx-auto py-8">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-semibold">Applicants</h1>
-        <a href="{{route('add-applicant')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Applicant</a>
+        <a href="{{ route('add-applicant') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Applicant</a>
     </div>
+
     <div class="mb-6 flex items-center">
         <input type="text" wire:model.debounce.300ms="search" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Search applicants...">
         <button wire:click="searchApplicants" class="ml-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Search</button>
     </div>
+
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <div class="overflow-x-auto max-h-96">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
+                        <!-- Applicant Info Columns -->
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Middle Name</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
@@ -37,12 +40,15 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guardian Contact Number</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guardian Address</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Relationship with PWD</th>
-                        {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> --}}
+
+                        <!-- Actions Column -->
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($applicants as $applicant)
                         <tr>
+                            <!-- Applicant Info Data -->
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->first_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->middle_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->last_name }}</td>
@@ -67,10 +73,15 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->g_contact_number }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->g_address }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->relationship_with_pwd }}</td>
-                            {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                <button wire:click="deleteApplicant({{ $applicant->id }})" class="text-red-600 hover:text-red-900 ml-2">Delete</button>
-                            </td> --}}
+
+                            <!-- Actions (Approved/Not Approved) -->
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button wire:click="approveApplicant({{ $applicant->id }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">Approve</button>
+                                <button wire:click="rejectApplicant({{ $applicant->id }})" class="bg-red-500 text-white px-4 py-2 rounded">
+                                    Decline
+                                </button>
+
+                            </td>
                         </tr>
                     @empty
                         <tr>
@@ -80,6 +91,7 @@
                 </tbody>
             </table>
         </div>
+
         <div class="px-6 py-3">
             {{ $applicants->links() }}
         </div>

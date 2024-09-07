@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\benefeciaries;
 use App\Models\Personalinfo as PF;
 use Livewire\Component;
 use WireUi\Traits\WireUiActions;
@@ -9,7 +10,7 @@ use WireUi\Traits\WireUiActions;
 class Applicant extends Component
 {
     use WireUiActions;
-
+    public $applicantStatus;
     public $personal_info = [
         'first_name' => '',
         'middle_name' => '',

@@ -23,6 +23,14 @@ class User extends Authenticatable
         'is_admin'
     ];
 
+
+    public function benefeciary()
+    {
+        return $this->hasOne(Benefeciaries::class, 'user_id');
+    }
+
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

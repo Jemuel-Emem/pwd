@@ -5,6 +5,12 @@
         <p class="text-lg font-medium">Your personal information has already been submitted.</p>
 
         <h2 class="text-2xl font-bold mt-6 mb-6">Submitted Information</h2>
+        @if ($applicantStatus)
+        <p class="text-lg font-medium">Applicant Status: {{ $applicantStatus }}</p>
+          @else
+        <p class="text-lg font-medium">No applicant status found for this user.</p>
+         @endif
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
                 <strong>First Name:</strong> {{ $personal_info['first_name'] }}

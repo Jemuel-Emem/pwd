@@ -48,6 +48,10 @@ Route::prefix('admin')->middleware(['auth', admin::class])->group(function () {
         return view('admin.add-staff');
     })->name('add-s');
 
+    Route::get('/benefeciaries', function () {
+        return view('admin.beneficiaries');
+    })->name('benefe');
+
 
 
 });
@@ -65,6 +69,10 @@ Route::prefix('user')->middleware(['auth', user::class])->group(function () {
     Route::get('/requirements-form', function () {
         return view('user.requirements-form');
     })->name('req');
+
+    Route::get('/Application-status', function () {
+        return view('user.applicantion-status');
+    })->name('apps');
 
 
 

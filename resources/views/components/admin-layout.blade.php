@@ -43,9 +43,9 @@
          </li>
 
          <li>
-            <a href="" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <a href="{{route('benefe')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
              <i class="ri-user-fill"></i>
-               <span class="ms-3">Applicant Recieved</span>
+               <span class="ms-3">Benefeciaries</span>
             </a>
          </li>
 
@@ -89,7 +89,7 @@
          <li>
             <a href="{{route('logout')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <i class="ri-file-chart-fill"></i>
-               <span class="ms-3">logout</span>
+               <span class="ms-3">logout    </span>
             </a>
          </li>
       </ul>

@@ -3,19 +3,82 @@
 namespace App\Livewire\Admin;
 
 use App\Models\Personalinfo as PF;
+use App\Models\benefeciaries as Beneficiary;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
 use Livewire\Component;
 
 class Applicant extends Component
 {
     use WithPagination;
+
     public $perPage = 10;
     public $search;
     protected $updatesQueryString = ['search'];
+
     public function searchApplicants()
     {
         $this->resetPage();
     }
+
+    public function approveApplicant($applicantId)
+    {
+        $applicant = PF::findOrFail($applicantId);
+
+        // Save the applicant's data into the Beneficiaries table
+        Beneficiary::create([
+            'user_id' => Auth::id(),
+            'first_name' => $applicant->first_name,
+            'middle_name' => $applicant->middle_name,
+            'last_name' => $applicant->last_name,
+            'suffix' => $applicant->suffix,
+            'sex' => $applicant->sex,
+            'date_of_birth' => $applicant->date_of_birth,
+            'age' => $applicant->age,
+            'civil_status' => $applicant->civil_status,
+            'contact_number' => $applicant->contact_number,
+            'address' => $applicant->address,
+            'barangay' => $applicant->barangay,
+            'type_of_disability' => $applicant->type_of_disability,
+            'cause_of_disability' => $applicant->cause_of_disability,
+            'applicantstatus' => 'approved',
+        ]);
+
+
+        flash()->success('Applicant approved and moved to beneficiaries.');
+
+    }
+
+    public function rejectApplicant($applicantId)
+{
+    $applicant = PF::findOrFail($applicantId);
+
+    // Optional: Save the declined applicant's data to the Beneficiaries table if needed
+    Beneficiary::create([
+        'user_id' => Auth::id(),
+        'first_name' => $applicant->first_name,
+        'middle_name' => $applicant->middle_name,
+        'last_name' => $applicant->last_name,
+        'suffix' => $applicant->suffix,
+        'sex' => $applicant->sex,
+        'date_of_birth' => $applicant->date_of_birth,
+        'age' => $applicant->age,
+        'civil_status' => $applicant->civil_status,
+        'contact_number' => $applicant->contact_number,
+        'address' => $applicant->address,
+        'barangay' => $applicant->barangay,
+        'type_of_disability' => $applicant->type_of_disability,
+        'cause_of_disability' => $applicant->cause_of_disability,
+        'applicantstatus' => 'not_approved',
+    ]);
+
+
+    $applicant->delete();
+  flash()->success('Applicant declined and removed.');
+
+}
+
+
     public function render()
     {
         $search = '%' . $this->search . '%';
@@ -52,5 +115,4 @@ class Applicant extends Component
             'applicants' => $applicants,
         ]);
     }
-    }
-
+}
