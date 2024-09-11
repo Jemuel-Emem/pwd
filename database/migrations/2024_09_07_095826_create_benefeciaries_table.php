@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('type_of_disability')->nullable();
             $table->string('cause_of_disability')->nullable();
             $table->enum('applicantstatus', ['pending', 'approved', 'not_approved'])->default('pending');
+            $table->string('benefit')->nullable();
             $table->timestamps();
         });
     }

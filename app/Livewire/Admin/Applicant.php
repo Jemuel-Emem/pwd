@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire\Admin;
-
+use App\Models\benefits;
 use App\Models\Personalinfo as PF;
 use App\Models\benefeciaries as Beneficiary;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +27,7 @@ class Applicant extends Component
 
         // Save the applicant's data into the Beneficiaries table
         Beneficiary::create([
-            'user_id' => Auth::id(),
+            'user_id' =>$applicant->user_id,
             'first_name' => $applicant->first_name,
             'middle_name' => $applicant->middle_name,
             'last_name' => $applicant->last_name,

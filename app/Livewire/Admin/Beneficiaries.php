@@ -9,9 +9,31 @@ use App\Models\benefeciaries as Beneficiary;
 class Beneficiaries extends Component
 {
     use WithPagination;
-
+    public $modalVisible = false;
+    public $selectedBeneficiary;
+    public $benefit;
     public $search = '';
 
+    public function openModal($beneficiaryId)
+{
+    // Fetch the beneficiary details
+    $this->selectedBeneficiary = Beneficiary::find($beneficiaryId);
+    $this->modalVisible = true;
+}
+
+public function addBenefitToBeneficiary()
+{
+    // Logic to save the benefit to the selected beneficiary
+    $this->selectedBeneficiary->benefit = $this->benefit;
+    $this->selectedBeneficiary->save();
+
+    // Close modal after saving
+    $this->modalVisible = false;
+}
+public function closeModal()
+{
+    $this->modalVisible = false;
+}
     public function searchh(){
            $this->render();
     }

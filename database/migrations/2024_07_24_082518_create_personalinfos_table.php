@@ -43,6 +43,7 @@ return new class extends Migration
 
 
             $table->string('status');
+            $table->string('benefit')->nullable();
             $table->timestamps();
         });
     }
