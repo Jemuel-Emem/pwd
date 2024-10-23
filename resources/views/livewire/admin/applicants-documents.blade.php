@@ -9,7 +9,7 @@
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <div class="overflow-x-auto max-h-96">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+                <thead class="bg-gray-800">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Medical Certification</th>

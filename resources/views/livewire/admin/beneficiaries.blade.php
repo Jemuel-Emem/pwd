@@ -8,24 +8,24 @@
     <!-- Beneficiaries Table -->
     <div class="overflow-x-auto">
         <table class="min-w-full bg-white border border-gray-200">
-            <thead class="bg-gray-100">
+            <thead class="bg-gray-800">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Middle Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Suffix</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sex</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">DOB</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Civil Status</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact No.</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Barangay</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disability</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cause of Disability</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Benefit</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Middle Name</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Suffix</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sex</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">DOB</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Civil Status</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact No.</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Barangay</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disability</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cause of Disability</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Benefit</th>
+                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
