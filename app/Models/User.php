@@ -29,7 +29,10 @@ class User extends Authenticatable
         return $this->hasOne(Benefeciaries::class, 'user_id');
     }
 
-
+    public function healthRecords()
+    {
+        return $this->hasMany(Health::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

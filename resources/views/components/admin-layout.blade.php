@@ -43,6 +43,21 @@
                <span class="ms-3 text-white hover:text-blue-500">Dashboard</span>
             </a>
          </li>
+         <li>
+            <a href="{{route('a.announcement')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <i class="ri-speak-fill text-green-500"></i>
+
+               <span class="ms-3 text-white hover:text-blue-500">Announcement</span>
+            </a>
+         </li>
+
+         <li>
+            <a href="{{route('a.health')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <i class="ri-hospital-fill text-green-500"></i>
+
+               <span class="ms-3 text-white hover:text-blue-500">Healt Monitoring</span>
+            </a>
+         </li>
 
          <li>
             <a href="{{route('benefe')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

@@ -5,7 +5,7 @@
                   <div>
                     <h1 class="text-4xl font-semibold tracking-tighter text-white lg:text-6xl text-balance">
                     Creating an inclusive system for persons with disabilities
-                      <span class="text-white">(PWD) in  barangay ensures that no one is left behind</span>
+                      <span class="text-white">(PWD) in  Municipality ensures that no one is left behind</span>
                     </h1>
                     <p class="mt-4 text-base font-medium text-gray-200 text-balance">
                     Fostering a community where accessibility and equal opportunities empower every individual to thrive and contribute

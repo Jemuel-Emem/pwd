@@ -8,7 +8,7 @@
         @if ($applicantStatus)
         <p class="text-lg font-medium">Applicant Status: {{ $applicantStatus }}</p>
           @else
-        <p class="text-lg font-medium">No applicant status found for this user.</p>
+        {{-- <p class="text-lg font-medium">No applicant status found for this user.</p> --}}
          @endif
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
