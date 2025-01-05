@@ -7,7 +7,7 @@
 
     <!-- Beneficiaries Table -->
     <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border border-gray-200">
+        <table id="beneficiariesTable"  class="min-w-full bg-white border border-gray-200">
             <thead class="bg-gray-800">
                 <tr>
                     <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
@@ -57,6 +57,8 @@
                 @endforelse
             </tbody>
         </table>
+
+
     </div>
 
     <!-- Pagination Links -->
@@ -91,4 +93,5 @@
         </div>
     </div>
     @endif
+
 </div>

@@ -1,91 +1,95 @@
 <div>
 
     @if (!$isFormVisible)
-    <div class="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-4">
-        <p class="text-lg font-medium">Your personal information has already been submitted.</p>
+    <div class="max-w-7xl mx-auto bg-white p-8 rounded-lg shadow-xl mt-6">
+        <p class="text-lg font-medium text-gray-700">Your personal information has already been submitted.</p>
 
-        <h2 class="text-2xl font-bold mt-6 mb-6">Submitted Information</h2>
+        <h2 class="text-2xl font-semibold text-gray-800 mt-6 mb-6">Submitted Information</h2>
+
         @if ($applicantStatus)
-        <p class="text-lg font-medium">Applicant Status: {{ $applicantStatus }}</p>
-          @else
-        {{-- <p class="text-lg font-medium">No applicant status found for this user.</p> --}}
-         @endif
+            <p class="text-lg font-medium text-gray-600">Applicant Status: <span class="font-bold text-green-600">{{ $applicantStatus }}</span></p>
+        @else
+            {{-- <p class="text-lg font-medium">No applicant status found for this user.</p> --}}
+        @endif
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-                <strong>First Name:</strong> {{ $personal_info['first_name'] }}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">First Name:</strong> <span class="text-gray-600">{{ $personal_info['first_name'] }}</span>
             </div>
-            <div>
-                <strong>Middle Name:</strong> {{ $personal_info['middle_name'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Middle Name:</strong> <span class="text-gray-600">{{ $personal_info['middle_name'] }}</span>
             </div>
-            <div>
-                <strong>Last Name:</strong> {{ $personal_info['last_name'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Last Name:</strong> <span class="text-gray-600">{{ $personal_info['last_name'] }}</span>
             </div>
-            <div>
-                <strong>Suffix:</strong> {{ $personal_info['suffix'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Suffix:</strong> <span class="text-gray-600">{{ $personal_info['suffix'] }}</span>
             </div>
-            <div>
-                <strong>Sex:</strong> {{ $personal_info['sex'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Sex:</strong> <span class="text-gray-600">{{ $personal_info['sex'] }}</span>
             </div>
-            <div>
-                <strong>Date of Birth:</strong> {{ $personal_info['date_of_birth'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Date of Birth:</strong> <span class="text-gray-600">{{ $personal_info['date_of_birth'] }}</span>
             </div>
-            <div>
-                <strong>Age:</strong> {{ $personal_info['age'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Age:</strong> <span class="text-gray-600">{{ $personal_info['age'] }}</span>
             </div>
-            <div>
-                <strong>Civil Status:</strong> {{ $personal_info['civil_status'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Civil Status:</strong> <span class="text-gray-600">{{ $personal_info['civil_status'] }}</span>
             </div>
-            <div>
-                <strong>Contact Number:</strong> {{ $personal_info['contact_number'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Contact Number:</strong> <span class="text-gray-600">{{ $personal_info['contact_number'] }}</span>
             </div>
-            <div>
-                <strong>Address:</strong> {{ $personal_info['address'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Address:</strong> <span class="text-gray-600">{{ $personal_info['address'] }}</span>
             </div>
-            <div>
-                <strong>Barangay:</strong> {{ $personal_info['barangay'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Barangay:</strong> <span class="text-gray-600">{{ $personal_info['barangay'] }}</span>
             </div>
-            <div>
-                <strong>Type of Disability:</strong> {{ $personal_info['type_of_disability'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Type of Disability:</strong> <span class="text-gray-600">{{ $personal_info['type_of_disability'] }}</span>
             </div>
-            <div>
-                <strong>Cause of Disability:</strong> {{ $personal_info['cause_of_disability'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Cause of Disability:</strong> <span class="text-gray-600">{{ $personal_info['cause_of_disability'] }}</span>
             </div>
-            <div>
-                <strong>Guardian First Name:</strong> {{ $personal_info['g_first_name'] }}
+
+            <!-- Guardian Information -->
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian First Name:</strong> <span class="text-gray-600">{{ $personal_info['g_first_name'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Middle Name:</strong> {{ $personal_info['g_middle_name'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Middle Name:</strong> <span class="text-gray-600">{{ $personal_info['g_middle_name'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Last Name:</strong> {{ $personal_info['g_last_name'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Last Name:</strong> <span class="text-gray-600">{{ $personal_info['g_last_name'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Suffix:</strong> {{ $personal_info['g_suffix'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Suffix:</strong> <span class="text-gray-600">{{ $personal_info['g_suffix'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Sex:</strong> {{ $personal_info['g_sex'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Sex:</strong> <span class="text-gray-600">{{ $personal_info['g_sex'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Date of Birth:</strong> {{ $personal_info['g_date_of_birth'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Date of Birth:</strong> <span class="text-gray-600">{{ $personal_info['g_date_of_birth'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Age:</strong> {{ $personal_info['g_age'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Age:</strong> <span class="text-gray-600">{{ $personal_info['g_age'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Civil Status:</strong> {{ $personal_info['g_civil_status'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Civil Status:</strong> <span class="text-gray-600">{{ $personal_info['g_civil_status'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Contact Number:</strong> {{ $personal_info['g_contact_number'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Contact Number:</strong> <span class="text-gray-600">{{ $personal_info['g_contact_number'] }}</span>
             </div>
-            <div>
-                <strong>Guardian Address:</strong> {{ $personal_info['g_address'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Guardian Address:</strong> <span class="text-gray-600">{{ $personal_info['g_address'] }}</span>
             </div>
-            <div>
-                <strong>Relationship with PWD:</strong> {{ $personal_info['relationship_with_pwd'] }}
+            <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
+                <strong class="text-gray-700">Relationship with PWD:</strong> <span class="text-gray-600">{{ $personal_info['relationship_with_pwd'] }}</span>
             </div>
         </div>
     </div>
+
     @else
 
     <div class="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-4">

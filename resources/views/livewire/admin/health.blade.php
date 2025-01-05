@@ -100,7 +100,7 @@
 
                 <thead class="bg-gray-800">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">User ID</th>
+                        {{-- <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">User ID</th> --}}
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Name</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Email</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">BP</th>
@@ -113,7 +113,7 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($users as $user)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->id }}</td>
+                            {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $user->id }}</td> --}}
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
                             @if ($user->healthRecords->isNotEmpty())
@@ -129,7 +129,21 @@
                                     class="text-indigo-600 hover:text-indigo-900" {{ $user->healthRecords->isEmpty() ? 'disabled' : '' }}>Edit</button>
                                 <button wire:click="deleteHealthInfo({{ $user->healthRecords->first()->id ?? '' }})"
                                     class="text-red-600 hover:text-red-900 ml-2" {{ $user->healthRecords->isEmpty() ? 'disabled' : '' }}>Delete</button>
-                            </td>
+                                    <button
+                                    onclick="printHealthRecord({
+                                        name: '{{ $user->name }}',
+                                        blood_pressure: '{{ $user->healthRecords->first()->blood_pressure ?? 'N/A' }}',
+                                        blood_type: '{{ $user->healthRecords->first()->blood_type ?? 'N/A' }}',
+                                        weight: '{{ $user->healthRecords->first()->weight ?? 'N/A' }}',
+                                        height: '{{ $user->healthRecords->first()->height ?? 'N/A' }}',
+                                        respiratory_rate: '{{ $user->healthRecords->first()->respiratory_rate ?? 'N/A' }}',
+                                        pulse_rate: '{{ $user->healthRecords->first()->pulse_rate ?? 'N/A' }}',
+                                        o2_stat: '{{ $user->healthRecords->first()->o2_stat ?? 'N/A' }}',
+                                        temperature: '{{ $user->healthRecords->first()->temperature ?? 'N/A' }}',
+                                        other_conditions: '{{ $user->healthRecords->first()->other_conditions ?? 'N/A' }}'
+                                    })"
+                                    class="text-gray-600 hover:text-gray-900 ml-2">Print</button>
+                                </td>
                         </tr>
                     @empty
                         <tr>
@@ -141,11 +155,128 @@
 
             </table>
         </div>
+
+
     </div>
 
 
     <div class="mt-4">
         {{ $users->links() }}
     </div>
+    <div id="printArea" class="hidden print:block">
+        <h2 class="text-2xl font-bold text-center mb-4">Health Information</h2>
+        <div class="grid grid-cols-3 gap-4 border p-4 rounded-md">
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">Name</h3>
+                <p id="printName" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">Blood Pressure</h3>
+                <p id="printBloodPressure" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">Blood Type</h3>
+                <p id="printBloodType" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">Weight</h3>
+                <p id="printWeight" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">Height</h3>
+                <p id="printHeight" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">Respiratory Rate</h3>
+                <p id="printRespiratoryRate" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">Pulse Rate</h3>
+                <p id="printPulseRate" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1 border-b pb-2">
+                <h3 class="font-semibold">O2 Stat</h3>
+                <p id="printO2Stat" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-1">
+                <h3 class="font-semibold">Temperature</h3>
+                <p id="printTemperature" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-3">
+                <h3 class="font-semibold">Other Health Conditions</h3>
+                <p id="printOtherConditions" class="text-gray-700"></p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @media print {
+            .hidden {
+                display: none !important;
+            }
+            .print:block {
+                display: block !important;
+            }
+            #printArea {
+                margin: 0 auto;
+                padding: 20px;
+                max-width: 800px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-family: Arial, sans-serif;
+            }
+            h2 {
+                color: #333;
+            }
+            .grid {
+                display: grid;
+                gap: 16px;
+            }
+            .grid-cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .border {
+                border: 1px solid #ccc;
+            }
+            .rounded-md {
+                border-radius: 8px;
+            }
+            .text-gray-700 {
+                color: #555;
+            }
+        }
+    </style>
+
+
+    <script>
+       function printHealthRecord(data) {
+    // Populate the printable area
+    document.getElementById('printName').textContent = `Name: ${data.name}`;
+    document.getElementById('printBloodPressure').textContent = `Blood Pressure: ${data.blood_pressure}`;
+    document.getElementById('printBloodType').textContent = `Blood Type: ${data.blood_type}`;
+    document.getElementById('printWeight').textContent = `Weight: ${data.weight}`;
+    document.getElementById('printHeight').textContent = `Height: ${data.height}`;
+    document.getElementById('printRespiratoryRate').textContent = `Respiratory Rate: ${data.respiratory_rate}`;
+    document.getElementById('printPulseRate').textContent = `Pulse Rate: ${data.pulse_rate}`;
+    document.getElementById('printO2Stat').textContent = `O2 Stat: ${data.o2_stat}`;
+    document.getElementById('printTemperature').textContent = `Temperature: ${data.temperature}`;
+    document.getElementById('printOtherConditions').textContent = `Other Conditions: ${data.other_conditions}`;
+
+    // Save the original body content and hide everything else except printArea
+    const originalBodyContent = document.body.innerHTML;
+    const printContents = document.getElementById('printArea').innerHTML;
+
+    // Only show the printArea content
+    document.body.innerHTML = printContents;
+
+    // Trigger the print
+    window.print();
+
+    // Restore the original body content after printing
+    document.body.innerHTML = originalBodyContent;
+}
+
+    </script>
+
 
 </div>
