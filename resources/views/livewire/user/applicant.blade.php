@@ -158,9 +158,29 @@
                 </div>
                 <div>
                     <label for="barangay" class="block text-sm font-medium text-gray-700">Barangay</label>
-                    <input id="barangay" type="text" wire:model.defer="personal_info.barangay" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+                    <select id="barangay" wire:model.defer="personal_info.barangay" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="">Select Barangay</option>
+                        <option value="Bambad">Bambad</option>
+                        <option value="Bual">Bual</option>
+                        <option value="Dansuli">Dansuli</option>
+                        <option value="D'lotilla">D'lotilla</option>
+                        <option value="Impao">Impao</option>
+                        <option value="Kalawag I">Kalawag I</option>
+                        <option value="Kalawag II">Kalawag II</option>
+                        <option value="Kalawag III">Kalawag III</option>
+                        <option value="Kenram">Kenram</option>
+                        <option value="Kolambog">Kolambog</option>
+                        <option value="Kudanding">Kudanding</option>
+                        <option value="Lagandang">Lagandang</option>
+                        <option value="Laguilayan">Laguilayan</option>
+                        <option value="Mapantig">Mapantig</option>
+                        <option value="New Pangasinan">New Pangasinan</option>
+                        <option value="Sampao">Sampao</option>
+                        <option value="Tayugo">Tayugo</option>
+                    </select>
                     @error('personal_info.barangay') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
+
                 <div>
                     <label for="type_of_disability" class="block text-sm font-medium text-gray-700">Type of Disability</label>
                     <input id="type_of_disability" type="text" wire:model.defer="personal_info.type_of_disability" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />

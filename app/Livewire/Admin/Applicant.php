@@ -25,7 +25,7 @@ class Applicant extends Component
     {
         $applicant = PF::findOrFail($applicantId);
 
-        // Save the applicant's data into the Beneficiaries table
+
         Beneficiary::create([
             'user_id' =>$applicant->user_id,
             'first_name' => $applicant->first_name,
@@ -44,39 +44,38 @@ class Applicant extends Component
             'applicantstatus' => 'approved',
         ]);
 
-
+        $applicant->update(['status' => 'approved']);
         flash()->success('Applicant approved and moved to beneficiaries.');
 
     }
 
     public function rejectApplicant($applicantId)
-{
-    $applicant = PF::findOrFail($applicantId);
+    {
+        $applicant = PF::findOrFail($applicantId);
 
-    // Optional: Save the declined applicant's data to the Beneficiaries table if needed
-    Beneficiary::create([
-        'user_id' => Auth::id(),
-        'first_name' => $applicant->first_name,
-        'middle_name' => $applicant->middle_name,
-        'last_name' => $applicant->last_name,
-        'suffix' => $applicant->suffix,
-        'sex' => $applicant->sex,
-        'date_of_birth' => $applicant->date_of_birth,
-        'age' => $applicant->age,
-        'civil_status' => $applicant->civil_status,
-        'contact_number' => $applicant->contact_number,
-        'address' => $applicant->address,
-        'barangay' => $applicant->barangay,
-        'type_of_disability' => $applicant->type_of_disability,
-        'cause_of_disability' => $applicant->cause_of_disability,
-        'applicantstatus' => 'not_approved',
-    ]);
+        Beneficiary::create([
+            'user_id' => Auth::id(),
+            'first_name' => $applicant->first_name,
+            'middle_name' => $applicant->middle_name,
+            'last_name' => $applicant->last_name,
+            'suffix' => $applicant->suffix,
+            'sex' => $applicant->sex,
+            'date_of_birth' => $applicant->date_of_birth,
+            'age' => $applicant->age,
+            'civil_status' => $applicant->civil_status,
+            'contact_number' => $applicant->contact_number,
+            'address' => $applicant->address,
+            'barangay' => $applicant->barangay,
+            'type_of_disability' => $applicant->type_of_disability,
+            'cause_of_disability' => $applicant->cause_of_disability,
+            'applicantstatus' => 'decline',
+        ]);
 
 
-    $applicant->delete();
-  flash()->success('Applicant declined and removed.');
+        $applicant->update(['status' => 'decline']);
 
-}
+        flash()->success('Applicant declined and removed.');
+    }
 
 
     public function render()

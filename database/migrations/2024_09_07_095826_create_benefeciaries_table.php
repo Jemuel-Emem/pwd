@@ -27,8 +27,9 @@ return new class extends Migration
             $table->string('barangay');
             $table->string('type_of_disability')->nullable();
             $table->string('cause_of_disability')->nullable();
-            $table->enum('applicantstatus', ['pending', 'approved', 'not_approved'])->default('pending');
-            $table->string('benefit')->nullable();
+            $table->enum('applicantstatus', ['pending', 'approved', 'decline'])->default('pending');
+            $table->unsignedBigInteger('benefit_id')->nullable();
+            $table->foreign('benefit_id')->references('id')->on('benefits')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>unified</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"  rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
@@ -44,35 +45,6 @@
             </a>
          </li>
          <li>
-            <a href="{{route('a.announcement')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <i class="ri-speak-fill text-green-500"></i>
-
-               <span class="ms-3 text-white hover:text-blue-500">Announcement</span>
-            </a>
-         </li>
-
-         <li>
-            <a href="{{route('a.health')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <i class="ri-hospital-fill text-green-500"></i>
-
-               <span class="ms-3 text-white hover:text-blue-500">Healt Monitoring</span>
-            </a>
-         </li>
-
-         <li>
-            <a href="{{route('benefe')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-             <i class="ri-user-fill text-green-500"></i>
-               <span class="ms-3 text-white hover:text-blue-500">Benefeciaries</span>
-            </a>
-         </li>
-
-         <li>
-            <a href="{{route('benefits')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-            <i class="ri-flower-fill text-green-500"></i>
-               <span class="ms-3 text-white hover:text-blue-500">Benefits</span>
-            </a>
-         </li>
-         <li>
             <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="manage" data-collapse-toggle="manage">
             <i class="ri-organization-chart text-green-500"></i>
                   <span class="flex-1 ms-3 text-white hover:text-blue-500 text-left rtl:text-right whitespace-nowrap">Manage</span>
@@ -91,6 +63,38 @@
                      <a href="{{route('app-d')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 text-white hover:text-green-500">Applicant Documents</a>
                   </li>
             </ul>
+         </li>
+
+         <li>
+            <a href="{{route('benefe')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+             <i class="ri-user-fill text-green-500"></i>
+               <span class="ms-3 text-white hover:text-blue-500">Benefeciaries</span>
+            </a>
+         </li>
+
+
+         <li>
+            <a href="{{route('a.announcement')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <i class="ri-speak-fill text-green-500"></i>
+
+               <span class="ms-3 text-white hover:text-blue-500">Announcement</span>
+            </a>
+         </li>
+
+         <li>
+            <a href="{{route('a.health')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <i class="ri-hospital-fill text-green-500"></i>
+
+               <span class="ms-3 text-white hover:text-blue-500">Healt Monitoring</span>
+            </a>
+         </li>
+
+
+         <li>
+            <a href="{{route('benefits')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <i class="ri-flower-fill text-green-500"></i>
+               <span class="ms-3 text-white hover:text-blue-500">Benefits</span>
+            </a>
          </li>
 
 

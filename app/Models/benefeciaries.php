@@ -34,4 +34,9 @@ class benefeciaries extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function benefit()
+{
+    return $this->belongsTo(\App\Models\benefits::class, 'benefit_id');
+}
+
 }

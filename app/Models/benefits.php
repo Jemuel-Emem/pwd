@@ -11,5 +11,6 @@ class benefits extends Model
     protected $fillable = [
         'particular',
         'quantity',
+
     ];
 }

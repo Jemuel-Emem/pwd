@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('type_of_disability');
             $table->string('cause_of_disability');
 
-            // Guardian Information
+
             $table->string('g_first_name');
             $table->string('g_middle_name')->nullable();
             $table->string('g_last_name');

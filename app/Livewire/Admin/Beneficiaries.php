@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire\Admin;
-
+use App\Models\benefits as Benifit;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\benefeciaries as Beneficiary;
@@ -12,24 +12,26 @@ class Beneficiaries extends Component
     public $modalVisible = false;
     public $selectedBeneficiary;
     public $benefit;
+    public $benefits;
     public $search = '';
 
     public function openModal($beneficiaryId)
-{
+    {
+        $this->selectedBeneficiary = Beneficiary::find($beneficiaryId);
+        $this->benefits = Benifit::all();
+        $this->modalVisible = true;
+    }
 
-    $this->selectedBeneficiary = Beneficiary::find($beneficiaryId);
-    $this->modalVisible = true;
-}
+    public function addBenefitToBeneficiary()
+    {
+        if ($this->benefit) {
+            $this->selectedBeneficiary->benefit_id = $this->benefit;
+            $this->selectedBeneficiary->save();
+        }
 
-public function addBenefitToBeneficiary()
-{
+        $this->modalVisible = false;
+    }
 
-    $this->selectedBeneficiary->benefit = $this->benefit;
-    $this->selectedBeneficiary->save();
-
-
-    $this->modalVisible = false;
-}
 public function closeModal()
 {
     $this->modalVisible = false;
@@ -48,6 +50,8 @@ public function closeModal()
 
         return view('livewire.admin.beneficiaries', [
             'beneficiaries' => $beneficiaries,
+            'benefits' => \App\Models\benefits::all(),
         ]);
     }
+
 }

@@ -38,6 +38,6 @@ class personalinfo extends Model
         'g_address',
         'relationship_with_pwd',
         'status',
-        'benefit',
+        'benefit_id',
     ];
 }

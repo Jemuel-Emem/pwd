@@ -45,10 +45,18 @@
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $beneficiary->type_of_disability }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $beneficiary->cause_of_disability }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ ucfirst($beneficiary->applicantstatus) }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">{{ $beneficiary->benefit }}</td>
-                        <td class="px-6 py-4">
-                            <button wire:click="openModal({{ $beneficiary->id }})" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 w-32">Add Benefit</button>
+                        <td class="px-6 py-4 text-sm text-gray-900">
+                            {{ $beneficiary->benefit ? $beneficiary->benefit->particular : 'No Benefit' }}
                         </td>
+
+                        <td class="px-6 py-4">
+                            @if($beneficiary->benefit)
+                                <span class="text-gray-500">No Actions Needed</span>
+                            @else
+                                <button wire:click="openModal({{ $beneficiary->id }})" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 w-32">Add Benefit</button>
+                            @endif
+                        </td>
+
                     </tr>
                 @empty
                     <tr>
@@ -61,12 +69,11 @@
 
     </div>
 
-    <!-- Pagination Links -->
+
     <div class="mt-4">
         {{ $beneficiaries->links() }}
     </div>
 
-    <!-- Add Benefit Modal -->
     @if($modalVisible)
     <div class="fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -79,8 +86,17 @@
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3 class="text-lg leading-6 font-medium text-gray-900">Add Benefit for {{ $selectedBeneficiary->first_name }}</h3>
                             <div class="mt-2">
-                                <p class="text-sm text-gray-500">Please add the benefit for this beneficiary below.</p>
-                                <input type="text" wire:model="benefit" placeholder="Enter benefit" class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <p class="text-sm text-gray-500">Please add a benefit for this beneficiary below.</p>
+
+
+                                <select wire:model="benefit" class="w-full px-4 py-2 mt-2 border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    <option value="">Select Benefit</option>
+                                    @foreach($benefits as $benefit)
+                                        <option value="{{ $benefit->id }}" class="text-black focus:text-black">{{ $benefit->particular }}</option>
+                                    @endforeach
+                                </select>
+
+
                             </div>
                         </div>
                     </div>

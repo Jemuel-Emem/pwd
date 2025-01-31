@@ -74,14 +74,26 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->g_address }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->relationship_with_pwd }}</td>
 
-                            <!-- Actions (Approved/Not Approved) -->
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button wire:click="approveApplicant({{ $applicant->id }})" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">Approve</button>
-                                <button wire:click="rejectApplicant({{ $applicant->id }})" class="bg-red-500 text-white px-4 py-2 rounded">
-                                    Decline
-                                </button>
 
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if ($applicant->status === 'approved' || $applicant->status === 'decline')
+                                    <span class="text-gray-500 font-semibold">No Actions Needed</span>
+                                @else
+                                    <button
+                                        wire:click="approveApplicant({{ $applicant->id }})"
+                                        class="font-bold py-1 px-3 rounded bg-green-500 hover:bg-green-700 text-white">
+                                        Approve
+                                    </button>
+
+                                    <button
+                                        wire:click="rejectApplicant({{ $applicant->id }})"
+                                        class="font-bold py-1 px-3 rounded bg-red-500 hover:bg-red-700 text-white">
+                                        Decline
+                                    </button>
+                                @endif
                             </td>
+
+
                         </tr>
                     @empty
                         <tr>
