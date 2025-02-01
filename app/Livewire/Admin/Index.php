@@ -19,9 +19,10 @@ class Index extends Component
         $this->benefitsCount = Benefits::count();
 
 
-        $this->barangayBenefitCounts = Benefeciaries::select('barangay', DB::raw('count(*) as count'))
-            ->groupBy('barangay')
-            ->get();
+        $this->barangayBenefitCounts = Benefeciaries::whereNotNull('benefit_id')
+        ->select('barangay', DB::raw('count(*) as count'))
+        ->groupBy('barangay')
+        ->get();
     }
 
     public function render()

@@ -42,7 +42,7 @@
             data: {
                 labels: barangayNames,
                 datasets: [{
-                    label: 'Number of Benefits by Barangay',
+                    label: 'Benifits Distributed',
                     data: benefitCounts,
                     backgroundColor: barColors,
                     borderColor: barColors.map(color => color.replace('0.5', '1')),
