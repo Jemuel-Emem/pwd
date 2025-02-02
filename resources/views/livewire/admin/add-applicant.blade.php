@@ -66,11 +66,33 @@
                     <input type="text" id="address" wire:model="personal_info.address" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     @error('personal_info.address') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
+
                 <div>
                     <label for="barangay" class="block text-sm font-medium text-gray-700">Barangay</label>
-                    <input type="text" id="barangay" wire:model="personal_info.barangay" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    <select id="barangay" wire:model.defer="personal_info.barangay" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        <option value="">Select Barangay</option>
+                        <option value="Bambad">Bambad</option>
+                        <option value="Bual">Bual</option>
+                        <option value="Dansuli">Dansuli</option>
+                        <option value="D'lotilla">D'lotilla</option>
+                        <option value="Impao">Impao</option>
+                        <option value="Kalawag I">Kalawag I</option>
+                        <option value="Kalawag II">Kalawag II</option>
+                        <option value="Kalawag III">Kalawag III</option>
+                        <option value="Kenram">Kenram</option>
+                        <option value="Kolambog">Kolambog</option>
+                        <option value="Kudanding">Kudanding</option>
+                        <option value="Lagandang">Lagandang</option>
+                        <option value="Laguilayan">Laguilayan</option>
+                        <option value="Mapantig">Mapantig</option>
+                        <option value="New Pangasinan">New Pangasinan</option>
+                        <option value="Sampao">Sampao</option>
+                        <option value="Tayugo">Tayugo</option>
+                    </select>
                     @error('personal_info.barangay') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
+
+
                 <div>
                     <label for="type_of_disability" class="block text-sm font-medium text-gray-700">Type of Disability</label>
                     <select id="type_of_disability" wire:model="personal_info.type_of_disability" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">

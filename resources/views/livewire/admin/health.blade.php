@@ -14,7 +14,7 @@
                 <label for="user_id" class="block text-sm font-medium text-gray-700">User</label>
                 <select id="user_id" wire:model="user_id"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <option value="">Select User</option>
+                    <option value="">Select Resident</option>
                     @foreach (App\Models\User::all() as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
@@ -76,6 +76,21 @@
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
                 @error('other_conditions') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
+
+            <div class="col-span-2">
+                <label for="remarks" class="block text-sm font-medium text-gray-700">Remarks</label>
+                <textarea id="remarks" wire:model="remarks"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></textarea>
+                @error('remarks') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-span-2">
+                <label for="date" class="block text-sm font-medium text-gray-700">Date Completed</label>
+                <input type="date" id="date" wire:model="date"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                @error('date') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            </div>
+
         </div>
 
         <div class="mt-6">
@@ -107,53 +122,68 @@
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">BY</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Weight</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Height</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Remarks</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Date</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($users as $user)
                         <tr>
-                            {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $user->id }}</td> --}}
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
+
                             @if ($user->healthRecords->isNotEmpty())
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $user->healthRecords->first()->blood_pressure }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $user->healthRecords->first()->blood_type }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $user->healthRecords->first()->weight }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $user->healthRecords->first()->height }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->healthRecords->first()->remarks }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $user->healthRecords->first()->date }}</td>
                             @else
-                                <td colspan="4" class="px-6 py-4 whitespace-nowrap text-center">No health records</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center" colspan="6">No health records</td>
                             @endif
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <button wire:click="editHealthInfo({{ $user->healthRecords->first()->id ?? '' }})"
-                                    class="text-indigo-600 hover:text-indigo-900" {{ $user->healthRecords->isEmpty() ? 'disabled' : '' }}>Edit</button>
-                                <button wire:click="deleteHealthInfo({{ $user->healthRecords->first()->id ?? '' }})"
-                                    class="text-red-600 hover:text-red-900 ml-2" {{ $user->healthRecords->isEmpty() ? 'disabled' : '' }}>Delete</button>
+
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                @if ($user->healthRecords->isNotEmpty())
+                                    <button wire:click="editHealthInfo({{ $user->healthRecords->first()->id }})"
+                                        class="text-indigo-600 hover:text-indigo-900">Edit</button>
+                                    <button wire:click="deleteHealthInfo({{ $user->healthRecords->first()->id }})"
+                                        class="text-red-600 hover:text-red-900 ml-2">Delete</button>
                                     <button
-                                    onclick="printHealthRecord({
-                                        name: '{{ $user->name }}',
-                                        blood_pressure: '{{ $user->healthRecords->first()->blood_pressure ?? 'N/A' }}',
-                                        blood_type: '{{ $user->healthRecords->first()->blood_type ?? 'N/A' }}',
-                                        weight: '{{ $user->healthRecords->first()->weight ?? 'N/A' }}',
-                                        height: '{{ $user->healthRecords->first()->height ?? 'N/A' }}',
-                                        respiratory_rate: '{{ $user->healthRecords->first()->respiratory_rate ?? 'N/A' }}',
-                                        pulse_rate: '{{ $user->healthRecords->first()->pulse_rate ?? 'N/A' }}',
-                                        o2_stat: '{{ $user->healthRecords->first()->o2_stat ?? 'N/A' }}',
-                                        temperature: '{{ $user->healthRecords->first()->temperature ?? 'N/A' }}',
-                                        other_conditions: '{{ $user->healthRecords->first()->other_conditions ?? 'N/A' }}'
-                                    })"
-                                    class="text-gray-600 hover:text-gray-900 ml-2">Print</button>
-                                </td>
+                                        onclick="printHealthRecord({
+                                            name: '{{ $user->name }}',
+                                            blood_pressure: '{{ $user->healthRecords->first()->blood_pressure ?? 'N/A' }}',
+                                            blood_type: '{{ $user->healthRecords->first()->blood_type ?? 'N/A' }}',
+                                            weight: '{{ $user->healthRecords->first()->weight ?? 'N/A' }}',
+                                            height: '{{ $user->healthRecords->first()->height ?? 'N/A' }}',
+                                            respiratory_rate: '{{ $user->healthRecords->first()->respiratory_rate ?? 'N/A' }}',
+                                            pulse_rate: '{{ $user->healthRecords->first()->pulse_rate ?? 'N/A' }}',
+                                            o2_stat: '{{ $user->healthRecords->first()->o2_stat ?? 'N/A' }}',
+                                            temperature: '{{ $user->healthRecords->first()->temperature ?? 'N/A' }}',
+                                            other_conditions: '{{ $user->healthRecords->first()->other_conditions ?? 'N/A' }}',
+                                            remarks: '{{ $user->healthRecords->first()->remarks ?? 'N/A' }}',
+                                            date: '{{ $user->healthRecords->first()->date ?? 'N/A' }}'
+                                        })"
+                                        class="text-gray-600 hover:text-gray-900 ml-2">Print</button>
+                                @else
+                                    <span class="text-gray-500">No actions available</span>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center py-4">No users or health records found.</td>
+                            <td colspan="9" class="text-center py-4">No users or health records found.</td>
                         </tr>
                     @endforelse
                 </tbody>
 
 
             </table>
+
+            <div class="mt-4">
+                {{ $users->links() }}
+            </div>
         </div>
 
 
@@ -206,6 +236,14 @@
                 <h3 class="font-semibold">Other Health Conditions</h3>
                 <p id="printOtherConditions" class="text-gray-700"></p>
             </div>
+            <div class="col-span-3 border-b pb-2">
+                <h3 class="font-semibold">Remarks</h3>
+                <p id="printRemarks" class="text-gray-700"></p>
+            </div>
+            <div class="col-span-3">
+                <h3 class="font-semibold">Date</h3>
+                <p id="printDateCompleted" class="text-gray-700"></p>
+            </div>
         </div>
     </div>
 
@@ -249,8 +287,7 @@
 
 
     <script>
-       function printHealthRecord(data) {
-    // Populate the printable area
+     function printHealthRecord(data) {
     document.getElementById('printName').textContent = `Name: ${data.name}`;
     document.getElementById('printBloodPressure').textContent = `Blood Pressure: ${data.blood_pressure}`;
     document.getElementById('printBloodType').textContent = `Blood Type: ${data.blood_type}`;
@@ -261,20 +298,17 @@
     document.getElementById('printO2Stat').textContent = `O2 Stat: ${data.o2_stat}`;
     document.getElementById('printTemperature').textContent = `Temperature: ${data.temperature}`;
     document.getElementById('printOtherConditions').textContent = `Other Conditions: ${data.other_conditions}`;
+    document.getElementById('printRemarks').textContent = `Remarks: ${data.remarks}`;
+    document.getElementById('printDate').textContent = `Date: ${data.date}`;
 
-    // Save the original body content and hide everything else except printArea
     const originalBodyContent = document.body.innerHTML;
     const printContents = document.getElementById('printArea').innerHTML;
 
-    // Only show the printArea content
     document.body.innerHTML = printContents;
-
-    // Trigger the print
     window.print();
-
-    // Restore the original body content after printing
     document.body.innerHTML = originalBodyContent;
 }
+
 
     </script>
 

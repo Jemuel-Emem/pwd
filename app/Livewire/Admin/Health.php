@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class Health extends Component
 {
     use WithPagination;
-
+    protected $paginationTheme = 'tailwind';
     public $blood_pressure;
     public $blood_type;
     public $weight;
@@ -18,7 +18,7 @@ class Health extends Component
     public $pulse_rate;
     public $o2_stat;
     public $temperature;
-    public $other_conditions;
+    public $other_conditions, $date, $remarks;
     public $health_id;
     public $user_id;
     public $isEdit = false;
@@ -34,6 +34,8 @@ class Health extends Component
         'o2_stat' => 'required|numeric|min:1',
         'temperature' => 'required|numeric|min:1',
         'other_conditions' => 'nullable|string|max:500',
+        'date' => 'required|date',
+        'remarks' => 'nullable|string|max:500',
     ];
     public function resetFields()
     {
@@ -48,6 +50,8 @@ class Health extends Component
             'temperature',
             'other_conditions',
             'health_id',
+            'remarks',
+            'date',
             'isEdit',
         ]);
     }
@@ -56,7 +60,7 @@ class Health extends Component
         $this->validate();
 
         HealthModel::create([
-            'user_id' => $this->user_id, // Associate health info with the user
+            'user_id' => $this->user_id,
             'blood_pressure' => $this->blood_pressure,
             'blood_type' => $this->blood_type,
             'weight' => $this->weight,
@@ -66,6 +70,8 @@ class Health extends Component
             'o2_stat' => $this->o2_stat,
             'temperature' => $this->temperature,
             'other_conditions' => $this->other_conditions,
+            'date' => $this->date,
+            'remarks' => $this->remarks,
         ]);
 
         session()->flash('message', 'Health information added successfully.');
@@ -86,6 +92,8 @@ class Health extends Component
         $this->o2_stat = $record->o2_stat;
         $this->temperature = $record->temperature;
         $this->other_conditions = $record->other_conditions;
+        $this->remarks = $record->remarks;
+        $this->date = $record->date;
         $this->isEdit = true;
     }
 
@@ -96,7 +104,7 @@ class Health extends Component
 
         $record = HealthModel::findOrFail($this->health_id);
         $record->update([
-            'user_id' => $this->user_id, // Update user_id
+            'user_id' => $this->user_id,
             'blood_pressure' => $this->blood_pressure,
             'blood_type' => $this->blood_type,
             'weight' => $this->weight,
@@ -106,6 +114,8 @@ class Health extends Component
             'o2_stat' => $this->o2_stat,
             'temperature' => $this->temperature,
             'other_conditions' => $this->other_conditions,
+            'date' => $this->date,
+            'remarks' => $this->remarks,
         ]);
 
         session()->flash('message', 'Health information updated successfully.');
@@ -123,8 +133,9 @@ class Health extends Component
 
     public function render()
     {
+
         return view('livewire.admin.health', [
-            'users' => User::with('healthRecords')->paginate(10),
+            'users' => User::with('healthRecords')->paginate(5),
         ]);
     }
 

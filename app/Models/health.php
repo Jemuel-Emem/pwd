@@ -20,6 +20,8 @@ class health extends Model
         'temperature',
         'other_conditions',
         'user_id',
+        'date',
+        'remarks'
     ];
 
     public function user()

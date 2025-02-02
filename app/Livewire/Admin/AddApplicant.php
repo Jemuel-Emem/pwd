@@ -64,7 +64,8 @@ class AddApplicant extends Component
     {
 
         $this->validate();
-
+        $this->personal_info['user_id'] = auth()->id();
+        $this->personal_info['status'] = 'pending';
          PF::create($this->personal_info);
          flash()->success('Personal information saved successfully!');
 
