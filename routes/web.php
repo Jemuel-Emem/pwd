@@ -64,6 +64,11 @@ Route::prefix('admin')->middleware(['auth', admin::class])->group(function () {
         return view('admin.health');
     })->name('a.health');
 
+    Route::get('/add-documents', function () {
+        return view('admin.adddocu');
+    })->name('a.add-d');
+
+
 
 
 });

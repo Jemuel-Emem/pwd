@@ -10,7 +10,7 @@ class RequirementComponent extends Component
 {
     use WithPagination;
 
-
+public $add_modal , $edit_id, $edit_modal;
     public function render()
     {
         return view('livewire.user.requirements', [

@@ -1,6 +1,7 @@
 <div class="max-w-6xl mx-auto py-8">
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-semibold">Applicants Documents</h1>
+        <h1 class="text-2xl font-semibold">Documents</h1>
+        <a href="{{ route('a.add-d') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add Documents</a>
     </div>
     <div class="mb-6 flex items-center">
         <input type="text" wire:model.debounce.300ms="search" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Search applicants...">

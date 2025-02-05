@@ -30,7 +30,7 @@
         @if ($announcement)
             <div class="bg-blue-50 p-6 rounded-lg shadow-md mt-8 mx-8">
                 <h2 class="text-2xl font-semibold text-gray-800">{{ $announcement->title }}</h2>
-                <p class="mt-2 text-lg text-gray-600">{{ $announcement->content }}</p>
+                <p class="mt-2 text-lg text-gray-600">{{ $announcement->description }}</p>
             </div>
         @else
             <div class="bg-gray-50 p-6 rounded-lg shadow-md mt-8 mx-8">
