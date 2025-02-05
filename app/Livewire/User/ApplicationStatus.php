@@ -18,9 +18,11 @@ class ApplicationStatus extends Component
 
         $this->applicantStatus = $beneficiary ? $beneficiary->applicantstatus : 'No status found for this user';
 
-        // Fetch benefits related to the beneficiary
+
         if ($beneficiary) {
-            $this->benefits = Benefeciaries::where('user_id', $userId)->get(); // Assuming the benefits are directly fetched from the Benefeciaries model
+            $this->benefits = Benefeciaries::with('benefit')
+                ->where('user_id', $userId)
+                ->get();
         }
     }
 

@@ -1,4 +1,15 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
+    @if (session()->has('message'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+        {{ session('message') }}
+    </div>
+@endif
+
+@if (session()->has('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+        {{ session('error') }}
+    </div>
+@endif
     <!-- Search Input -->
     <div class="flex justify-between mb-4">
         <input type="text" wire:model="search" placeholder="Search by name" class="w-80 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
