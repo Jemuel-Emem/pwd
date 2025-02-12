@@ -13,12 +13,13 @@
             <div>
                 <label for="user_id" class="block text-sm font-medium text-gray-700">User</label>
                 <select id="user_id" wire:model="user_id"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                    <option value="">Select Resident</option>
-                    @foreach (App\Models\User::all() as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="">Select Resident</option>
+                @foreach (App\Models\User::where('is_admin', 0)->get() as $user)
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @endforeach
+            </select>
+
                 @error('user_id') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
 

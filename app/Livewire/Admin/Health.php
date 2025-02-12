@@ -133,9 +133,8 @@ class Health extends Component
 
     public function render()
     {
-
         return view('livewire.admin.health', [
-            'users' => User::with('healthRecords')->paginate(5),
+            'users' => User::where('is_admin', 0)->with('healthRecords')->paginate(5),
         ]);
     }
 
