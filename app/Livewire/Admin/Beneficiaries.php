@@ -28,35 +28,46 @@ class Beneficiaries extends Component
     public function addBenefitToBeneficiary()
     {
         if ($this->benefit) {
-            $this->selectedBeneficiary->benefit_id = $this->benefit;
-            $this->selectedBeneficiary->save();
-
             $benefit = Benefit::find($this->benefit);
-            $phoneNumber = $this->selectedBeneficiary->contact_number;
-            $message = "Hello {$this->selectedBeneficiary->first_name}, you have been granted the benefit '{$benefit->particular}'. Please visit the office to claim your benefits at your earliest convenience. Thank you!\n\n- UNIFIED Assistance Program";
 
+            if ($benefit && $benefit->quantity > 0) {
+                // Assign benefit to beneficiary
+                $this->selectedBeneficiary->benefit_id = $this->benefit;
+                $this->selectedBeneficiary->save();
 
-            $ch = curl_init();
+                // Decrease the quantity by 1
+                $benefit->decrement('quantity');
 
-            $parameters = [
-                'apikey' => '046125f45f4f187e838905df98273c4e',
-                'number' => $phoneNumber,
-                'message' =>  $message,
-                'sendername' => 'Estanz',
-            ];
+                // Send SMS notification
+                $phoneNumber = $this->selectedBeneficiary->contact_number;
+                $message = "Hello {$this->selectedBeneficiary->first_name}, you have been granted the benefit '{$benefit->particular}'. Please visit the office to claim your benefits at your earliest convenience. Thank you!\n\n- UNIFIED Assistance Program";
 
-            curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/messages');
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $ch = curl_init();
 
-            $output = curl_exec($ch);
-            curl_close($ch);
+                $parameters = [
+                    'apikey' => '046125f45f4f187e838905df98273c4e',
+                    'number' => $phoneNumber,
+                    'message' =>  $message,
+                    'sendername' => 'Estanz',
+                ];
+
+                curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/messages');
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                $output = curl_exec($ch);
+                curl_close($ch);
+            } else {
+                session()->flash('error', 'Insufficient quantity for this benefit.');
+            }
         }
 
-$this->modalVisible = False;
+        $this->modalVisible = false;
+    }
 
-        }
+
+
 
 
 
