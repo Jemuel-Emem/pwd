@@ -194,7 +194,7 @@
     <div class="mt-4">
         {{ $users->links() }}
     </div>
-    <div id="printArea" class="hidden print:block">
+    <div id="printArea" class="hidden">
         <h2 class="text-2xl font-bold text-center mb-4">Health Information</h2>
         <div class="grid grid-cols-3 gap-4 border p-4 rounded-md">
             <div class="col-span-1 border-b pb-2">
@@ -249,69 +249,98 @@
     </div>
 
     <style>
+        /* Print-specific styles */
         @media print {
-            .hidden {
-                display: none !important;
+            body * {
+                visibility: hidden; /* Hide everything by default */
             }
-            .print:block {
-                display: block !important;
+
+            #printArea, #printArea * {
+                visibility: visible; /* Show only the print area */
             }
+
             #printArea {
-                margin: 0 auto;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
                 padding: 20px;
-                max-width: 800px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
                 font-family: Arial, sans-serif;
             }
+
             h2 {
                 color: #333;
+                text-align: center;
+                margin-bottom: 20px;
             }
+
             .grid {
                 display: grid;
                 gap: 16px;
             }
+
             .grid-cols-3 {
                 grid-template-columns: repeat(3, 1fr);
             }
+
             .border {
                 border: 1px solid #ccc;
             }
+
             .rounded-md {
                 border-radius: 8px;
             }
+
             .text-gray-700 {
                 color: #555;
+            }
+
+            .col-span-3 {
+                grid-column: span 3;
+            }
+
+            .border-b {
+                border-bottom: 1px solid #ccc;
+            }
+
+            .pb-2 {
+                padding-bottom: 0.5rem;
+            }
+
+            .font-semibold {
+                font-weight: 600;
             }
         }
     </style>
 
+<script>
+    function printHealthRecord(data) {
 
-    <script>
-     function printHealthRecord(data) {
-    document.getElementById('printName').textContent = `Name: ${data.name}`;
-    document.getElementById('printBloodPressure').textContent = `Blood Pressure: ${data.blood_pressure}`;
-    document.getElementById('printBloodType').textContent = `Blood Type: ${data.blood_type}`;
-    document.getElementById('printWeight').textContent = `Weight: ${data.weight}`;
-    document.getElementById('printHeight').textContent = `Height: ${data.height}`;
-    document.getElementById('printRespiratoryRate').textContent = `Respiratory Rate: ${data.respiratory_rate}`;
-    document.getElementById('printPulseRate').textContent = `Pulse Rate: ${data.pulse_rate}`;
-    document.getElementById('printO2Stat').textContent = `O2 Stat: ${data.o2_stat}`;
-    document.getElementById('printTemperature').textContent = `Temperature: ${data.temperature}`;
-    document.getElementById('printOtherConditions').textContent = `Other Conditions: ${data.other_conditions}`;
-    document.getElementById('printRemarks').textContent = `Remarks: ${data.remarks}`;
-    document.getElementById('printDate').textContent = `Date: ${data.date}`;
-
-    const originalBodyContent = document.body.innerHTML;
-    const printContents = document.getElementById('printArea').innerHTML;
-
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalBodyContent;
-}
+        document.getElementById('printName').textContent = `Name: ${data.name}`;
+        document.getElementById('printBloodPressure').textContent = `Blood Pressure: ${data.blood_pressure}`;
+        document.getElementById('printBloodType').textContent = `Blood Type: ${data.blood_type}`;
+        document.getElementById('printWeight').textContent = `Weight: ${data.weight}`;
+        document.getElementById('printHeight').textContent = `Height: ${data.height}`;
+        document.getElementById('printRespiratoryRate').textContent = `Respiratory Rate: ${data.respiratory_rate}`;
+        document.getElementById('printPulseRate').textContent = `Pulse Rate: ${data.pulse_rate}`;
+        document.getElementById('printO2Stat').textContent = `O2 Stat: ${data.o2_stat}`;
+        document.getElementById('printTemperature').textContent = `Temperature: ${data.temperature}`;
+        document.getElementById('printOtherConditions').textContent = `Other Conditions: ${data.other_conditions}`;
+        document.getElementById('printRemarks').textContent = `Remarks: ${data.remarks}`;
+        document.getElementById('printDateCompleted').textContent = `Date: ${data.date}`;
 
 
-    </script>
+        const printArea = document.getElementById('printArea');
+        printArea.classList.remove('hidden');
+
+
+        window.print();
+
+        // Hide the print area after printing
+        printArea.classList.add('hidden');
+    }
+</script>
 
 
 </div>

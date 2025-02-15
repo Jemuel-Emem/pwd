@@ -4,7 +4,7 @@ namespace App\Livewire\User;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\requirements as RQ;// Replace with your actual model
+use App\Models\requirements as RQ;
 
 class RequirementComponent extends Component
 {

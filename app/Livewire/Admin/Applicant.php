@@ -25,7 +25,6 @@ class Applicant extends Component
     {
         $applicant = PF::findOrFail($applicantId);
 
-
         Beneficiary::create([
             'user_id' =>$applicant->user_id,
             'first_name' => $applicant->first_name,
@@ -45,8 +44,11 @@ class Applicant extends Component
         ]);
 
         $applicant->update(['status' => 'approved']);
-        flash()->success('Applicant approved and moved to beneficiaries.');
 
+        // Send Approval Notification
+        $this->sendSmsNotification($applicant->contact_number, "Hello {$applicant->first_name}, your application has been APPROVED. You are now a beneficiary of the UNIFIED Assistance Program. Please visit our office for further instructions. Thank you!");
+
+        flash()->success('Applicant approved and moved to beneficiaries.');
     }
 
     public function rejectApplicant($applicantId)
@@ -68,14 +70,40 @@ class Applicant extends Component
             'barangay' => $applicant->barangay,
             'type_of_disability' => $applicant->type_of_disability,
             'cause_of_disability' => $applicant->cause_of_disability,
-            'applicantstatus' => 'decline',
+            'applicantstatus' => 'declined',
         ]);
 
+        $applicant->update(['status' => 'declined']);
 
-        $applicant->update(['status' => 'decline']);
+        // Send Decline Notification
+        $this->sendSmsNotification($applicant->contact_number, "Hello {$applicant->first_name}, we regret to inform you that your application has been DECLINED. For further inquiries, please contact our office. Thank you!");
 
         flash()->success('Applicant declined and removed.');
     }
+
+    /**
+     * Send SMS Notification
+     */
+    private function sendSmsNotification($phoneNumber, $message)
+    {
+        $ch = curl_init();
+
+        $parameters = [
+            'apikey' => '046125f45f4f187e838905df98273c4e', // Replace with actual API key
+            'number' => $phoneNumber,
+            'message' => $message,
+            'sendername' => 'Estanz',
+        ];
+
+        curl_setopt($ch, CURLOPT_URL, 'https://semaphore.co/api/v4/messages');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($parameters));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $output = curl_exec($ch);
+        curl_close($ch);
+    }
+
 
 
     public function render()

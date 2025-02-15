@@ -1,46 +1,49 @@
-<div class="p-6 bg-white rounded-lg shadow-md">
-    @if (session()->has('message'))
-    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-        {{ session('message') }}
-    </div>
-@endif
+<div>
+    <div class="p-6 bg-white rounded-lg shadow-md">
+        <!-- Success and Error Messages -->
+        @if (session()->has('message'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+            {{ session('message') }}
+        </div>
+        @endif
 
-@if (session()->has('error'))
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-        {{ session('error') }}
-    </div>
-@endif
-    <!-- Search Input -->
-    <div class="flex justify-between mb-4">
-        <input type="text" wire:model="search" placeholder="Search by name" class="w-80 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-        <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors" wire:click="searchh">Search</button>
-    </div>
+        @if (session()->has('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            {{ session('error') }}
+        </div>
+        @endif
 
-    <!-- Beneficiaries Table -->
-    <div class="overflow-x-auto">
-        <table id="beneficiariesTable"  class="min-w-full bg-white border border-gray-200">
-            <thead class="bg-gray-800">
-                <tr>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Name</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Middle Name</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Name</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Suffix</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sex</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">DOB</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Age</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Civil Status</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact No.</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Barangay</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Disability</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cause of Disability</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Benefit</th>
-                    <th class="px-6 py-3 text-white text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @forelse($beneficiaries as $beneficiary)
+        <!-- Search Input -->
+        <div class="flex justify-between mb-4">
+            <input type="text" wire:model="search" placeholder="Search by name" class="w-80 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors" wire:click="searchh">Search</button>
+        </div>
+
+        <!-- Beneficiaries Table -->
+        <div class="overflow-x-auto">
+            <table id="printTable" class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-800">
+                    <tr>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">First Name</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Middle Name</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Last Name</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Suffix</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Sex</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">DOB</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Age</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Civil Status</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Contact No.</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Address</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Barangay</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Disability</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Cause of Disability</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Benefit</th>
+                        <th class="px-6 py-3 text-white text-left text-xs font-medium uppercase tracking-wider">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @forelse($beneficiaries as $beneficiary)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $beneficiary->first_name }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $beneficiary->middle_name }}</td>
@@ -59,7 +62,6 @@
                         <td class="px-6 py-4 text-sm text-gray-900">
                             {{ $beneficiary->benefit ? $beneficiary->benefit->particular : 'No Benefit' }}
                         </td>
-
                         <td class="px-6 py-4">
                             @if($beneficiary->benefit)
                                 <span class="text-gray-500">No Actions Needed</span>
@@ -67,47 +69,49 @@
                                 <button wire:click="openModal({{ $beneficiary->id }})" class="bg-blue-500 text-white px-3 py-1 rounded-lg hover:bg-blue-600 w-32">Add Benefit</button>
                             @endif
                         </td>
-
                     </tr>
-                @empty
+                    @empty
                     <tr>
                         <td colspan="15" class="px-6 py-4 text-center text-sm text-gray-500">No beneficiaries found.</td>
                     </tr>
-                @endforelse
-            </tbody>
-        </table>
+                    @endforelse
+                </tbody>
+            </table>
 
+            <!-- Print Button -->
+            <div class="no-print">
+                <button onclick="printTable()" class="bg-gray-500 text-white w-64 p-1 text-center mt-2">Print</button>
+            </div>
+        </div>
 
+        <!-- Pagination -->
+        <div class="mt-4">
+            {{ $beneficiaries->links() }}
+        </div>
     </div>
 
-
-    <div class="mt-4">
-        {{ $beneficiaries->links() }}
-    </div>
-
+    <!-- Modal for Adding Benefit -->
     @if($modalVisible)
     <div class="fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
+            <!-- Modal content -->
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                             <h3 class="text-lg leading-6 font-medium text-gray-900">Add Benefit for {{ $selectedBeneficiary->first_name }}</h3>
                             <div class="mt-2">
-                                <p class="text-sm text-gray-500">Please add a benefit for this beneficiary below.</p>
-
-
+                                <p class="text-sm text-gray-500">Select a benefit to assign to this beneficiary.</p>
                                 <select wire:model="benefit" class="w-full px-4 py-2 mt-2 border-2 border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                                     <option value="">Select Benefit</option>
                                     @foreach($benefits as $benefit)
-                                        <option value="{{ $benefit->id }}" class="text-black focus:text-black">{{ $benefit->particular }}</option>
+                                        <option value="{{ $benefit->id }}">{{ $benefit->particular }}</option>
                                     @endforeach
                                 </select>
-
-
+                                @error('benefit') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>
@@ -121,4 +125,15 @@
     </div>
     @endif
 
+    <!-- Print Script -->
+    <script>
+        function printTable() {
+            var tableContent = document.getElementById('printTable').outerHTML;
+            var originalContent = document.body.innerHTML;
+            document.body.innerHTML = tableContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        }
+    </script>
 </div>

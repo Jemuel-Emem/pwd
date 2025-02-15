@@ -14,6 +14,223 @@
         #admin-text {
             transition: color 0.5s ease;
         }
+
+
+        /* Print-specific styles */
+        @media print {
+            @page {
+                size: landscape; /* Set page orientation to landscape */
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                font-size: 12px; /* Smaller font size for better fit */
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse; /* Ensure borders are clean */
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border: 1px solid #ddd; /* Add borders to cells */
+            }
+
+            th {
+                background-color: #f2f2f2; /* Light gray background for headers */
+            }
+
+            .no-print {
+                display: none; /* Hide elements with this class during printing */
+            }
+        }
+
+        /* Regular styles for the page */
+        .p-6 {
+            padding: 1.5rem;
+        }
+
+        .bg-white {
+            background-color: white;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .overflow-x-auto {
+            overflow-x: auto;
+        }
+
+        .min-w-full {
+            min-width: 100%;
+        }
+
+        .bg-gray-800 {
+            background-color: #2d3748;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .tracking-wider {
+            letter-spacing: 0.05em;
+        }
+
+        .bg-green-100 {
+            background-color: #f0fff4;
+        }
+
+        .border-green-400 {
+            border-color: #48bb78;
+        }
+
+        .text-green-700 {
+            color: #2f855a;
+        }
+
+        .bg-red-100 {
+            background-color: #fff5f5;
+        }
+
+        .border-red-400 {
+            border-color: #f56565;
+        }
+
+        .text-red-700 {
+            color: #c53030;
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .rounded {
+            border-radius: 0.25rem;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .w-80 {
+            width: 20rem;
+        }
+
+        .border {
+            border-width: 1px;
+        }
+
+        .border-gray-300 {
+            border-color: #e2e8f0;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .focus\:outline-none:focus {
+            outline: none;
+        }
+
+        .focus\:ring-2:focus {
+            box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.5);
+        }
+
+        .focus\:ring-green-500:focus {
+            box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.5);
+        }
+
+        .focus\:border-transparent:focus {
+            border-color: transparent;
+        }
+
+        .bg-green-500 {
+            background-color: #48bb78;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .hover\:bg-green-600:hover {
+            background-color: #38a169;
+        }
+
+        .transition-colors {
+            transition-property: background-color, border-color, color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+
+        .bg-gray-500 {
+            background-color: #718096;
+        }
+
+        .w-64 {
+            width: 16rem;
+        }
+
+        .p-1 {
+            padding: 0.25rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+
+
     </style>
 </head>
 <body>
