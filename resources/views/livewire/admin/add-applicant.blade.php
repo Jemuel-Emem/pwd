@@ -97,14 +97,32 @@
                     <label for="type_of_disability" class="block text-sm font-medium text-gray-700">Type of Disability</label>
                     <select id="type_of_disability" wire:model="personal_info.type_of_disability" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <option value="">Select</option>
-                        <option>Deaf or Hard of Hearing</option>
-                        <option>Blind or Visually Impaired</option>
-                        <option>Mobility Impairmnet</option>
-                        <option>Intellectual Dissabilty</option>
+                        <option>Learning Disability</option>
+                        <option>Hearing Impairment</option>
+                        <option>Visual Disability</option>
+                        <option>Development Disability</option>
+                        <option>Emotional Disturbance</option>
+                        <option>Orthopedic Impairment</option>
+                        <option>Autism</option>
+                        <option>Physical Disability</option>
+                        <option>Deaf-Blindness</option>
+                        <option>ADHD</option>
+                        <option>Mobility Impairment</option>
+                        <option>Mental - Illness Disability</option>
+                        <option>Speech and Language Impairment</option>
+                        <option>Intellectual Disability</option>
+                        <option>Speech Disability</option>
+                        <option>Cerebral Palsy</option>
+                        <option>Neurological Disorder</option>
+                        <option>Mental & Speech Disability</option>
+                        <option>Dwarfism</option>
                     </select>
 
-                    @error('personal_info.type_of_disability') <span class="text-red-500">{{ $message }}</span> @enderror
+                    @error('personal_info.type_of_disability')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
                 </div>
+
                 <div>
                     <label for="cause_of_disability" class="block text-sm font-medium text-gray-700">Cause of Disability</label>
                     <select id="cause_of_disability" wire:model="personal_info.cause_of_disability" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">

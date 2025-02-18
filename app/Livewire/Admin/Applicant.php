@@ -55,30 +55,16 @@ class Applicant extends Component
     {
         $applicant = PF::findOrFail($applicantId);
 
-        Beneficiary::create([
-            'user_id' => Auth::id(),
-            'first_name' => $applicant->first_name,
-            'middle_name' => $applicant->middle_name,
-            'last_name' => $applicant->last_name,
-            'suffix' => $applicant->suffix,
-            'sex' => $applicant->sex,
-            'date_of_birth' => $applicant->date_of_birth,
-            'age' => $applicant->age,
-            'civil_status' => $applicant->civil_status,
-            'contact_number' => $applicant->contact_number,
-            'address' => $applicant->address,
-            'barangay' => $applicant->barangay,
-            'type_of_disability' => $applicant->type_of_disability,
-            'cause_of_disability' => $applicant->cause_of_disability,
-            'applicantstatus' => 'declined',
-        ]);
-
+        // Update applicant status to 'declined' before deleting
         $applicant->update(['status' => 'declined']);
+
+        // Delete the applicant instead of inserting them into the beneficiaries table
+        $applicant->delete();
 
         // Send Decline Notification
         $this->sendSmsNotification($applicant->contact_number, "Hello {$applicant->first_name}, we regret to inform you that your application has been DECLINED. For further inquiries, please contact our office. Thank you!");
 
-        flash()->success('Applicant declined and removed.');
+        flash()->success('Applicant has been declined and removed.');
     }
 
     /**

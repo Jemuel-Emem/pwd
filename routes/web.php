@@ -68,6 +68,11 @@ Route::prefix('admin')->middleware(['auth', admin::class])->group(function () {
         return view('admin.adddocu');
     })->name('a.add-d');
 
+    Route::get('/qualified_applicants', function () {
+        return view('admin.qualified_list');
+    })->name('a.q_list');
+
+
 
 
 
