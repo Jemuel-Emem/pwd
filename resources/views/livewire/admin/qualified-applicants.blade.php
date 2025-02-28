@@ -3,6 +3,26 @@
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-semibold text-gray-800">Qualified Applicants</h2>
 
+            <!-- Date Filters -->
+            <div class="flex items-center gap-4">
+                <select wire:model="selectedMonth" class="p-2 border rounded-lg">
+                    <option value="">Select Month</option>
+                    @foreach(range(1,12) as $month)
+                        <option value="{{ $month }}">{{ date("F", mktime(0, 0, 0, $month, 1)) }}</option>
+                    @endforeach
+                </select>
+
+                <select wire:model="selectedYear" class="p-2 border rounded-lg">
+                    <option value="">Select Year</option>
+                    @foreach(range(date('Y'), date('Y') - 5) as $year)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                    @endforeach
+                </select>
+
+                <button wire:click="filterApplicants" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    View Applicants
+                </button>
+            </div>
         </div>
 
         <div id="printableTable">

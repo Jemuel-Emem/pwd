@@ -11,15 +11,29 @@ class QualifiedApplicants extends Component
 {
     use WithPagination;
 
-    public $perPage = 10; // Number of records per page
+    public $perPage = 10;
+    public $selectedMonth;
+    public $selectedYear;
+
+    public function filterApplicants()
+    {
+        $this->resetPage(); // Reset pagination when filtering
+    }
 
     public function render()
     {
-        $qualifiedApplicants = Benefeciaries::where('applicantstatus', 'approved')
-            ->paginate($this->perPage);
+        $query = Benefeciaries::where('applicantstatus', 'approved');
+
+        if ($this->selectedMonth) {
+            $query->whereMonth('created_at', $this->selectedMonth);
+        }
+
+        if ($this->selectedYear) {
+            $query->whereYear('created_at', $this->selectedYear);
+        }
 
         return view('livewire.admin.qualified-applicants', [
-            'qualifiedApplicants' => $qualifiedApplicants,
+            'qualifiedApplicants' => $query->paginate($this->perPage),
         ]);
     }
 }

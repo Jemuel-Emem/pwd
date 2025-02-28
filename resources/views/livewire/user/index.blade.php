@@ -24,6 +24,20 @@
             </div>
         </div>
     </section>
+    <section class="py-12 bg-gray-50">
+        <h2 class="text-4xl font-bold text-gray-500 mb-10 text-center">Available Benefits</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mx-8">
+            @foreach ($benefits as $benefit)
+                <div class="w-80 bg-blue-100 shadow-lg rounded-2xl p-6 flex flex-col items-center text-center transform transition duration-300 hover:scale-105 hover:shadow-xl">
+
+
+                    <h3 class="text-xl font-semibold text-blue-700">{{ $benefit->particular }}</h3>
+                    <p class="text-gray-600 text-lg font-medium mt-2">Available Slots: {{ $benefit->quantity }}</p>
+                </div>
+            @endforeach
+        </div>
+    </section>
 
     <section>
 <label for="" class="text-4xl font-bold text-red-500">Announcement!</label>
@@ -38,4 +52,8 @@
             </div>
         @endif
     </section>
+
+
+
+
 </div>
