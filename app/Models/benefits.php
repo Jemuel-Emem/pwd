@@ -13,4 +13,14 @@ class benefits extends Model
         'quantity',
 
     ];
+
+    protected $table = 'benefits';
+
+    public function beneficiaries()
+    {
+        return $this->belongsToMany(benefeciaries::class, 'beneficiary_benefit', 'benefit_id', 'beneficiary_id')
+                    ->withTimestamps();
+    }
+
+
 }

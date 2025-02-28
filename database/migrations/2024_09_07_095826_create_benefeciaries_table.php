@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('benefeciaries', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
@@ -27,10 +27,11 @@ return new class extends Migration
             $table->string('barangay');
             $table->string('type_of_disability')->nullable();
             $table->string('cause_of_disability')->nullable();
-            $table->enum('applicantstatus', ['pending', 'approved', 'decline'])->default('pending');
-            $table->unsignedBigInteger('benefit_id')->nullable();
-            $table->foreign('benefit_id')->references('id')->on('benefits')->onDelete('set null');
+            $table->enum('applicantstatus', ['pending', 'approved', 'declined'])->default('pending');
             $table->timestamps();
+
+            // Foreign Key
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

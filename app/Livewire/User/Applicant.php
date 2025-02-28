@@ -66,8 +66,30 @@ class Applicant extends Component
         'personal_info.relationship_with_pwd' => 'required|string|max:255'
     ];
 
+    public function updatedPersonalInfo($value, $key)
+    {
+        if ($key === 'date_of_birth') {
+            $this->personal_info['age'] = $this->calculateAge($value);
+        }
+
+        if ($key === 'g_date_of_birth') {
+            $this->personal_info['g_age'] = $this->calculateAge($value);
+        }
+    }
+
+    private function calculateAge($dob)
+    {
+        if (!$dob) {
+            return null;
+        }
+
+        return \Carbon\Carbon::parse($dob)->age;
+    }
+
+
     public function submit()
     {
+        $this->personal_info['age'] = $this->calculateAge($this->personal_info['date_of_birth']);
         $this->validate();
 
         PF::updateOrCreate(

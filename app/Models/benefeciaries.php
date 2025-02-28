@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class benefeciaries extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'user_id',
         'first_name',
@@ -26,17 +25,20 @@ class benefeciaries extends Model
         'cause_of_disability',
         'applicantstatus',
     ];
-    protected $table = 'benefeciaries';
 
+    protected $table = 'benefeciaries';
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function benefit()
-{
-    return $this->belongsTo(\App\Models\benefits::class, 'benefit_id');
-}
+    public function benefits()
+    {
+        return $this->belongsToMany(Benefits::class, 'benefeciary_benefit', 'beneficiary_id', 'benefit_id')
+                    ->withTimestamps();
+    }
+
+
 
 }

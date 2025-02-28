@@ -127,12 +127,12 @@
                 </div>
                 <div>
                     <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                    <input id="date_of_birth" type="date" wire:model.defer="personal_info.date_of_birth" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+                    <input id="date_of_birth" type="date" wire:model.defer="personal_info.date_of_birth" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" onchange="calculateAge()"/>
                     @error('personal_info.date_of_birth') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
-                    <input id="age" type="number" wire:model.defer="personal_info.age" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+                    <input id="age" type="number" wire:model.defer="personal_info.age" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" readonly/>
                     @error('personal_info.age') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
@@ -247,12 +247,12 @@
                 </div>
                 <div>
                     <label for="g_date_of_birth" class="block text-sm font-medium text-gray-700">Guardian Date of Birth</label>
-                    <input id="g_date_of_birth" type="date" wire:model.defer="personal_info.g_date_of_birth" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+                    <input id="g_date_of_birth" type="date" wire:model.defer="personal_info.g_date_of_birth" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" onchange="calculateGuardianAge()" />
                     @error('personal_info.g_date_of_birth') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label for="g_age" class="block text-sm font-medium text-gray-700">Guardian Age</label>
-                    <input id="g_age" type="number" wire:model.defer="personal_info.g_age" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+                    <input id="g_age" type="number" wire:model.defer="personal_info.g_age" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" readonly />
                     @error('personal_info.g_age') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div>
@@ -288,4 +288,39 @@
         </form>
     </div>
     @endif
+
+
+    <script>
+        function calculateAge() {
+            let dob = document.getElementById('date_of_birth').value;
+            if (dob) {
+                let dobDate = new Date(dob);
+                let today = new Date();
+                let age = today.getFullYear() - dobDate.getFullYear();
+                let monthDiff = today.getMonth() - dobDate.getMonth();
+                let dayDiff = today.getDate() - dobDate.getDate();
+
+                // Adjust age if the birthday hasn't occurred yet this year
+                if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                    age--;
+                }
+
+                document.getElementById('age').value = age;
+            }
+        }
+
+        function calculateGuardianAge() {
+        let dob = document.getElementById('g_date_of_birth').value;
+        if (dob) {
+            let birthDate = new Date(dob);
+            let today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            let monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            document.getElementById('g_age').value = age;
+        }
+    }
+    </script>
 </div>

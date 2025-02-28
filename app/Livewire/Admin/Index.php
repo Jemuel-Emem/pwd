@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Livewire\Admin;
+
+use App\Models\benefeciaries;
 use Illuminate\Support\Facades\DB;
-use App\Models\Benefeciaries;
+
 use App\Models\User;
-use App\Models\Benefits;
+
+use App\Models\benefits;
 use Livewire\Component;
 
 class Index extends Component
@@ -16,13 +19,13 @@ class Index extends Component
     public function mount()
     {
         $this->pwdCount = User::where('is_admin', 0)->count();
-        $this->benefitsCount = Benefits::count();
+        $this->benefitsCount = benefits::count();
 
-
-        $this->barangayBenefitCounts = Benefeciaries::whereNotNull('benefit_id')
-        ->select('barangay', DB::raw('count(*) as count'))
-        ->groupBy('barangay')
-        ->get();
+        // Assign directly to the class property
+        $this->barangayBenefitCounts = Benefeciaries::whereHas('benefits')
+            ->select('barangay', DB::raw('count(*) as count'))
+            ->groupBy('barangay')
+            ->get();
     }
 
     public function render()
@@ -30,7 +33,7 @@ class Index extends Component
         return view('livewire.admin.index', [
             'pwdCount' => $this->pwdCount,
             'benefitsCount' => $this->benefitsCount,
-            'barangayBenefitCounts' => $this->barangayBenefitCounts,
+            'barangayBenefitCounts' => $this-> barangayBenefitCounts,
         ]);
     }
 }
