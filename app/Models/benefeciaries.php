@@ -33,11 +33,18 @@ class benefeciaries extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function benefits()
-    {
-        return $this->belongsToMany(Benefits::class, 'benefeciary_benefit', 'beneficiary_id', 'benefit_id')
-                    ->withTimestamps();
-    }
+    // public function benefits()
+    // {
+    //     return $this->belongsToMany(Benefits::class, 'benefeciary_benefit', 'beneficiary_id', 'benefit_id')
+    //                 ->withTimestamps();
+    // }
+
+ // In Beneficiary model (Beneficiaries.php)
+public function benefits()
+{
+    return $this->belongsToMany(Benefits::class, 'beneficiary_benefits', 'beneficiary_id', 'benefit_id');
+}
+
 
 
 

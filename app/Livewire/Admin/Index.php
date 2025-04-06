@@ -20,12 +20,11 @@ class Index extends Component
     {
         $this->pwdCount = User::where('is_admin', 0)->count();
         $this->benefitsCount = benefits::count();
-
-        // Assign directly to the class property
         $this->barangayBenefitCounts = Benefeciaries::whereHas('benefits')
-            ->select('barangay', DB::raw('count(*) as count'))
-            ->groupBy('barangay')
-            ->get();
+        ->select('barangay', DB::raw('count(*) as count'))
+        ->groupBy('barangay')
+        ->get();
+
     }
 
     public function render()
