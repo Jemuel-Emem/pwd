@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\benefits;
 use App\Models\benefeciaries;
 use App\Models\Personalinfo as PF;
 use Livewire\Component;
@@ -10,6 +11,9 @@ use WireUi\Traits\WireUiActions;
 class Applicant extends Component
 {
     use WireUiActions;
+    public $benefitsList; // Add this property
+    public $selectedBenefits = []; // For storing selected benefits
+    public $benefit_id;
     public $applicantStatus;
     public $personal_info = [
         'first_name' => '',
@@ -102,19 +106,43 @@ class Applicant extends Component
 
         $this->loadPersonalInfo();
     }
+    // public function submitPersonalInformation()
+    // {
+    //     $this->validate();
+
+    //     PF::updateOrCreate(
+    //         ['user_id' => Auth::id()],
+    //         array_merge($this->personal_info, ['status' => 'Already Submit Personal Information'])
+    //     );
+
+    //     flash()->success('Personal information saved successfully!');
+
+
+    //     $this->loadPersonalInfo();
+    // }
+
     public function submitPersonalInformation()
     {
         $this->validate();
 
+
         PF::updateOrCreate(
             ['user_id' => Auth::id()],
-            array_merge($this->personal_info, ['status' => 'Already Submit Personal Information'])
+            array_merge($this->personal_info, [
+                'benefit_id' => $this->benefit_id,
+                'status' => 'Already Submitted'
+            ])
         );
 
-        flash()->success('Personal information saved successfully!');
 
+
+        $this->notification()->success(
+            $title = 'Success',
+            $description = 'Personal information and benefits saved successfully!'
+        );
 
         $this->loadPersonalInfo();
+        $this->isFormVisible = false;
     }
 
     public $isFormVisible = true;
@@ -122,6 +150,15 @@ class Applicant extends Component
     public function mount()
     {
         $this->loadPersonalInfo();
+        // Remove ->toArray() to keep it as a Collection of objects
+        $this->benefitsList = Benefits::all();
+
+        if (!$this->isFormVisible) {
+            $personalInfo = PF::where('user_id', Auth::id())->first();
+            if ($personalInfo) {
+                $this->benefit_id = $personalInfo->benefit_id;
+            }
+        }
     }
 
     public function loadPersonalInfo()

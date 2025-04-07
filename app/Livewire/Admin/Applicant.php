@@ -95,7 +95,9 @@ class Applicant extends Component
     public function render()
     {
         $search = '%' . $this->search . '%';
-        $applicants = PF::query()
+        $applicants = PF::with(['benefit' => function($query) {
+            $query->select('id', 'particular');
+        }])
             ->where(function ($query) use ($search) {
                 $query->where('first_name', 'like', $search)
                       ->orWhere('middle_name', 'like', $search)

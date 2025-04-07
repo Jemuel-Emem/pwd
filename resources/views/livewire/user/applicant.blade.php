@@ -87,6 +87,15 @@
             <div class="p-4 bg-gray-50 rounded-lg shadow-md border border-gray-200">
                 <strong class="text-gray-700">Relationship with PWD:</strong> <span class="text-gray-600">{{ $personal_info['relationship_with_pwd'] }}</span>
             </div>
+            {{-- <td class="px-6 py-4 whitespace-nowrap">
+                @if($applicant && $applicant->benefit)
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        {{ $applicant->benefit->particular }}
+                    </span>
+                @else
+                    <span class="text-gray-500">No benefit selected</span>
+                @endif
+            </td> --}}
         </div>
     </div>
 
@@ -280,6 +289,23 @@
                     <label for="relationship_with_pwd" class="block text-sm font-medium text-gray-700">Relationship with PWD</label>
                     <input id="relationship_with_pwd" type="text" wire:model.defer="personal_info.relationship_with_pwd" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
                     @error('personal_info.relationship_with_pwd') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="mb-4">
+                    <label for="benefit_id" class="block text-sm font-medium text-gray-700">Benefit</label>
+                    <select
+                        id="benefit_id"
+                        wire:model="benefit_id"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    >
+                        <option value="">Select Benefit</option>
+                        @foreach($benefitsList as $benefit)
+                            <option value="{{ $benefit->id }}">{{ $benefit->particular }}</option>
+                        @endforeach
+                    </select>
+                    @error('benefit_id')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
             <div class="mt-6">

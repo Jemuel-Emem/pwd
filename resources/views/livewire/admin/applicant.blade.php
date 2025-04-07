@@ -15,7 +15,7 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-800">
                     <tr>
-                        <!-- Applicant Info Columns -->
+
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">First Name</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Middle Name</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Last Name</th>
@@ -39,16 +39,17 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Guardian Civil Status</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Guardian Contact Number</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Guardian Address</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Benefit</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Relationship with PWD</th>
 
-                        <!-- Actions Column -->
+
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($applicants as $applicant)
                         <tr>
-                            <!-- Applicant Info Data -->
+
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->first_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->middle_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->last_name }}</td>
@@ -72,6 +73,22 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->g_civil_status }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->g_contact_number }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->g_address }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if($applicant->benefit_id)
+                                    @php
+                                        $benefit = App\Models\Benefits::find($applicant->benefit_id);
+                                    @endphp
+                                    @if($benefit)
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            {{ $benefit->particular }}
+                                        </span>
+                                    @else
+                                        <span class="text-gray-500">No benefits (invalid ID: {{ $applicant->benefit_id }})</span>
+                                    @endif
+                                @else
+                                    <span class="text-gray-500">No benefits</span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $applicant->relationship_with_pwd }}</td>
 
 

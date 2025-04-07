@@ -22,5 +22,9 @@ class benefits extends Model
                     ->withTimestamps();
     }
 
+    public function personalInfos()
+{
+    return $this->hasMany(\App\Models\Personalinfo::class, 'benefit_id');
+}
 
 }

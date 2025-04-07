@@ -44,6 +44,7 @@ return new class extends Migration
 
             $table->string('status');
             $table->string('benefit')->nullable();
+            $table->unsignedBigInteger('benefit_id')->nullable();
             $table->timestamps();
         });
     }
