@@ -65,7 +65,7 @@ public function closeViewBenefitsModal()
 
             // Send SMS notification
             $phoneNumber = $this->selectedBeneficiary->contact_number;
-            $message = "Hello {$this->selectedBeneficiary->first_name}, you have been granted the benefit '{$benefit->particular}'. Please visit the office to claim it.";
+            $message = "Hello {$this->selectedBeneficiary->first_name}, there's an available  '{$benefit->particular}' for you!. Please visit the PDAO office to claim you benefits at your earliest convenience . Thank You!";
 
             $ch = curl_init();
             $parameters = [
